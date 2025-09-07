@@ -1,0 +1,130 @@
+{
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "Setup project scaffolding",
+      "status": "done",
+      "assigneeId": "m1",
+      "priority": "high",
+      "createdAt": "2024-05-01T09:00:00Z"
+    },
+    {
+      "id": "t2",
+      "title": "Design wireframes",
+      "status": "in_progress",
+      "assigneeId": "m2",
+      "priority": "med",
+      "createdAt": "2024-05-01T11:00:00Z"
+    },
+    {
+      "id": "t3",
+      "title": "Implement auth placeholder",
+      "status": "backlog",
+      "assigneeId": "m3",
+      "priority": "low",
+      "createdAt": "2024-05-02T09:00:00Z"
+    },
+    {
+      "id": "t4",
+      "title": "Create README outline",
+      "status": "done",
+      "assigneeId": "m1",
+      "priority": "low",
+      "createdAt": "2024-05-02T13:00:00Z"
+    },
+    {
+      "id": "t5",
+      "title": "Build dashboard layout",
+      "status": "in_progress",
+      "assigneeId": "m4",
+      "priority": "high",
+      "createdAt": "2024-05-03T10:00:00Z"
+    },
+    {
+      "id": "t6",
+      "title": "Write seed data",
+      "status": "done",
+      "assigneeId": "m2",
+      "priority": "med",
+      "createdAt": "2024-05-03T15:00:00Z"
+    },
+    {
+      "id": "t7",
+      "title": "Setup linting",
+      "status": "in_progress",
+      "assigneeId": "m3",
+      "priority": "high",
+      "createdAt": "2024-05-04T09:00:00Z"
+    },
+    {
+      "id": "t8",
+      "title": "Create KpiCard component",
+      "status": "backlog",
+      "assigneeId": "m2",
+      "priority": "med",
+      "createdAt": "2024-05-05T09:00:00Z"
+    },
+    {
+      "id": "t9",
+      "title": "Add Tailwind container",
+      "status": "backlog",
+      "assigneeId": "m1",
+      "priority": "low",
+      "createdAt": "2024-05-06T09:00:00Z"
+    },
+    {
+      "id": "t10",
+      "title": "Style Kanban board",
+      "status": "backlog",
+      "assigneeId": "m4",
+      "priority": "med",
+      "createdAt": "2024-05-07T09:00:00Z"
+    },
+    {
+      "id": "t11",
+      "title": "Test mobile nav",
+      "status": "backlog",
+      "assigneeId": "m3",
+      "priority": "high",
+      "createdAt": "2024-05-08T09:00:00Z"
+    },
+    {
+      "id": "t12",
+      "title": "Write commit guidelines",
+      "status": "done",
+      "assigneeId": "m4",
+      "priority": "low",
+      "createdAt": "2024-05-08T15:00:00Z"
+    },
+    {
+      "id": "t13",
+      "title": "Implement TaskCard",
+      "status": "in_progress",
+      "assigneeId": "m1",
+      "priority": "med",
+      "createdAt": "2024-05-09T09:00:00Z"
+    },
+    {
+      "id": "t14",
+      "title": "Setup tsconfig paths",
+      "status": "done",
+      "assigneeId": "m2",
+      "priority": "low",
+      "createdAt": "2024-05-09T14:00:00Z"
+    },
+    {
+      "id": "t15",
+      "title": "Research drag and drop libs",
+      "status": "backlog",
+      "assigneeId": "m4",
+      "priority": "low",
+      "createdAt": "2024-05-10T09:00:00Z"
+    }
+  ],
+  "members": [
+    { "id": "m1", "name": "Alice Johnson", "handle": "alice" },
+    { "id": "m2", "name": "Bob Smith", "handle": "bob" },
+    { "id": "m3", "name": "Carol Danvers", "handle": "carol" },
+    { "id": "m4", "name": "David Lee", "handle": "david" }
+  ]
+}
