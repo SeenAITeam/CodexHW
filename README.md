@@ -30,3 +30,7 @@ Phase 1 static → Phase 2 local state → Phase 3 DnD → Phase 4 Supabase
 Branches: `main`, `develop`, `feature/*`
 
 Commits: `feat:`, `ui:`, etc.
+
+## Troubleshooting
+
+- Note: ESLint is pinned to 8.57.0 for compatibility with Next.js 14.2.x. ESLint 9 is not yet supported by eslint-config-next.
