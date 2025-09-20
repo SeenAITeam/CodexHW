@@ -1,20 +1,77 @@
 'use client'
+
+import { useCallback, useEffect, useState } from 'react'
+
 import KpiCard from '@/components/KpiCard'
-import { initialTasks } from '@/lib/data'
+import { supabase } from '@/lib/supabaseClient'
+import type { Task } from '@/lib/types'
 
 export default function OverviewPage() {
-  const tasks = initialTasks()
+  const [tasks, setTasks] = useState<Task[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchTasks = useCallback(async () => {
+    if (!supabase) {
+      setError('Supabase client is not configured.')
+      setLoading(false)
+      return
+    }
+
+    setLoading(true)
+    try {
+      const { data, error } = await supabase
+        .from('tasks')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        throw error
+      }
+
+      setTasks(data ?? [])
+      setError(null)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unable to load tasks.'
+      setError(message)
+      setTasks([])
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchTasks()
+
+    const handleUpdated = () => {
+      fetchTasks()
+    }
+
+    window.addEventListener('tasks:updated', handleUpdated)
+    return () => {
+      window.removeEventListener('tasks:updated', handleUpdated)
+    }
+  }, [fetchTasks])
+
   const total = tasks.length
-  const inProg = tasks.filter(t => t.status === 'in_progress').length
+  const inProgress = tasks.filter(t => t.status === 'in_progress').length
   const done = tasks.filter(t => t.status === 'done').length
+
+  const valueFor = (count: number) => (loading || error ? '—' : count)
 
   return (
     <section className="space-y-6">
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        <KpiCard label="Total Tasks" value={total} sub="All tasks tracked in the board" />
-        <KpiCard label="In Progress" value={inProg} sub="Currently being worked on" />
-        <KpiCard label="Done" value={done} sub="Completed tasks" />
+        <KpiCard label="Total Tasks" value={valueFor(total)} sub="All tasks tracked in the board" />
+        <KpiCard label="In Progress" value={valueFor(inProgress)} sub="Currently being worked on" />
+        <KpiCard label="Done" value={valueFor(done)} sub="Completed tasks" />
       </div>
+
+      {error ? (
+        <div className="rounded-2xl border border-rose-200 bg-rose-50/80 p-3 text-sm text-rose-700 dark:border-rose-900/40 dark:bg-rose-900/10 dark:text-rose-200">
+          Failed to load tasks: {error}
+        </div>
+      ) : null}
 
       <div className="rounded-2xl border p-4 bg-white/70 dark:bg-white/5">
         <h3 className="font-semibold mb-2">What is this?</h3>
