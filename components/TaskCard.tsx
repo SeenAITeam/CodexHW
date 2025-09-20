@@ -9,12 +9,18 @@ const priorityClass: Record<string, string> = {
 }
 
 export default function TaskCard({ task }: { task: Task }) {
+  const priorityKey = (task.priority ?? 'med') as keyof typeof priorityClass
+  const createdDate = task.created_at ? new Date(task.created_at) : null
+  const createdDisplay = createdDate && !Number.isNaN(createdDate.getTime())
+    ? createdDate.toLocaleDateString()
+    : '—'
+
   return (
     <div className="rounded-xl border bg-white/80 dark:bg-white/5 p-3 shadow-sm hover:shadow transition">
       <div className="flex items-center justify-between">
         <h4 className="font-medium leading-tight pr-2">{task.title}</h4>
-        <span className={clsx('text-[10px] px-2 py-0.5 rounded-full', priorityClass[task.priority ?? 'low'])}>
-          {task.priority ?? 'low'}
+        <span className={clsx('text-[10px] px-2 py-0.5 rounded-full', priorityClass[priorityKey] ?? priorityClass.med)}>
+          {task.priority ?? 'med'}
         </span>
       </div>
       <div className="mt-2 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
@@ -23,9 +29,9 @@ export default function TaskCard({ task }: { task: Task }) {
           {statusMeta[task.status]?.label ?? task.status}
         </span>
         <span>•</span>
-        <span>Assignee: {task.assignee ?? '—'}</span>
+        <span>Assignee: {task.assignee_id ?? '—'}</span>
         <span>•</span>
-        <span>{new Date(task.createdAt).toLocaleDateString()}</span>
+        <span>{createdDisplay}</span>
       </div>
     </div>
   )
